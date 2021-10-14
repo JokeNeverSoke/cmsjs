@@ -12,7 +12,7 @@ type DayInfo = Record<number, PeriodInfo | null>;
 type TableInfo = Record<DayKey, DayInfo>;
 
 /** takes the raw html string of a period in getstudentcal and extracts information */
-const extractInfo = (html: string): PeriodInfo => {
+export const extractInfo = (html: string): PeriodInfo => {
   const g = /'c1'>(?<name>.*?)<\/.*?(?:\((?<location>[\w]+)\))\((?<source>[\w]+)\)/g.exec(
     html
   )!.groups!;
