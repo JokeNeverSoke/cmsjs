@@ -13,10 +13,9 @@ type TableInfo = Record<DayKey, DayInfo>;
 
 /** takes the raw html string of a period in getstudentcal and extracts information */
 const extractInfo = (html: string): PeriodInfo => {
-  const g =
-    /'c1'>(?<name>.*?)<\/.*?(?:\((?<location>[\w]+)\))\((?<source>[\w]+)\)/g.exec(
-      html
-    )!.groups!;
+  const g = /'c1'>(?<name>.*?)<\/.*?(?:\((?<location>[\w]+)\))\((?<source>[\w]+)\)/g.exec(
+    html
+  )!.groups!;
   return {
     name: g.name,
     location: g.location,
@@ -137,7 +136,7 @@ export class Session {
       let img = await this.getAuthScreenShot(page);
       let text = await this.guessAuthImg(img);
 
-      while (text.length != 6 && text.replace(/[^0-9]/g, '').length != 4) {
+      while (text.length !== 6 && text.replace(/[^0-9]/g, '').length !== 4) {
         log('captcha not recognized, retrying');
         (await page.$('#safecode'))!.click();
         await page.waitForSelector('#safecode', {
@@ -147,15 +146,15 @@ export class Session {
         text = await this.guessAuthImg(img);
       }
       log(`text recognized: "${text}"`);
-      await page.$('input[name=authnum]').then((el) => el?.type(text));
+      await page.$('input[name=authnum]').then(el => el?.type(text));
     } else {
       log('no code discovered');
     }
   }
 
   private async fillLogin(page: pptr.Page) {
-    await page.$('#psid').then((el) => el?.type(this.psid));
-    await page.$('#passwd').then((el) => el?.type(this.password));
+    await page.$('#psid').then(el => el?.type(this.psid));
+    await page.$('#passwd').then(el => el?.type(this.password));
   }
 
   async saveCookies(p?: string) {
@@ -207,7 +206,7 @@ export class Session {
         });
         log('filling in');
         await Promise.all([this.solveAuthCode(page), this.fillLogin(page)]);
-        await page.$('input[name=post]').then((el) => el?.click());
+        await page.$('input[name=post]').then(el => el?.click());
         await page.waitForNavigation();
         if (!page.url().includes('login')) status = true;
       }

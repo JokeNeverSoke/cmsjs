@@ -8,6 +8,6 @@ describe('create session', () => {
     expect(session.psid).toEqual(psid);
     expect(session.password).toEqual(password);
     expect(session.cookies).toEqual(true);
-    session.close()
+    session.close();
   });
 });
