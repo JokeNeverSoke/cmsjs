@@ -32,6 +32,9 @@ jobs:
 
       - name: test
         run: pnpm test -- --ci --coverage
+        env:
+          CMS_PSID: ${{ secrets.CMS_PSID }}
+          CMS_PASSWORD: ${{ secrets.CMS_PASSWORD }}
 
       - name: upload coverage data
         uses: coverallsapp/github-action@master
