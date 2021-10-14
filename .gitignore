@@ -1,0 +1,11 @@
+dist/
+coverage/
+.vscode/
+node_modules/
+
+.env
+
+# generated cache files
+**/s[0-9]*.json
+**/t[0-9]*.json
+**/p[0-9]*.json
